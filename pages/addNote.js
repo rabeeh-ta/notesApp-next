@@ -15,7 +15,7 @@ const karla = Karla({
 
 export default function AddNote() {
 
-  const [note,setNote ] = useState({title:'', content:''});
+  const [note,setNote ] = useState({title:'', author:'',content:''});
   const router = useRouter();
 
   function noteChangeHandler(name, value){
@@ -61,6 +61,12 @@ export default function AddNote() {
               Note Title: <input className={Style.inputElement} name="title" value={note.title} onChange={(e)=>noteChangeHandler(e.target.name, e.target.value)}  />
             </label>
             <br/>
+
+            <label>
+              Note Autor: <input className={Style.inputElement} name="author" value={note.author} onChange={(e)=>noteChangeHandler(e.target.name, e.target.value)}  />
+            </label>
+            <br/>
+           
            
             <label>
               Note Content: <textarea
