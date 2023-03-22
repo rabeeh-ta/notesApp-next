@@ -25,10 +25,12 @@ export default function AddNote() {
         [name]: value
       }
     })
+    console.log(note)
   }
 
   function saveNote(e){
     e.preventDefault()
+    console.log(note)
     axios.post('/api/postNote', note).then(function (response) {
       console.log(response);
       router.push('/');
