@@ -94,6 +94,7 @@
   vertical-align: middle;
   will-change: transform,opacity;
   color: white;
+  margin: 0px 5px;
 }
 
 .button:hover {
