@@ -19,9 +19,10 @@ export default function login() {
       password: userInfo.password,
       redirect: false,
     });
-    console.log(res);
+
     if (res.status === 200) {
-      router.push('/');
+      // Always do navigations after the first render to avoid Error: Abort fetching component for route
+      router.push('/', undefined, { shallow: true });
     } else {
       alert('wrong credentials');
     }

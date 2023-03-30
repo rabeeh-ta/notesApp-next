@@ -12,10 +12,19 @@ export const authOptions = {
         const { email, password } = credentials;
         // bellow func will return NULL or User Obj
         // authorize will return 401 for NULL and 200 for anything else
-        return await authenticateUser(email, password);
+        const user = await authenticateUser(email, password);
+        return user;
       },
     }),
   ],
+
+  callbacks: {
+    async session({ session, token }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.user.uuid = token.sub; // the sub filed in the token container the id field from the object returned from the authorize function
+      return session;
+    },
+  },
   pages: {
     signIn: '/auth/login',
   },

@@ -3,26 +3,20 @@ import Link from 'next/link';
 import Style from '../styles/card.module.css';
 
 import { Karla } from 'next/font/google';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
+import { authOptions } from './api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
 
 const karla = Karla({
   weight: '700',
   subsets: ['latin'],
 });
 
-export default function AddNote() {
-  const session = useSession();
+export default function AddNote({ session }) {
+  console.log(session);
   const router = useRouter();
-
-  useEffect(() => {
-    if (session.status === 'unauthenticated') {
-      router.push('/');
-    }
-  }, []);
-  session.status;
 
   const [note, setNote] = useState({ title: '', author: '', content: '' });
 
@@ -119,4 +113,23 @@ export default function AddNote() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }

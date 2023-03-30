@@ -15,11 +15,11 @@ model Note {
   modifiedDate DateTime @updatedAt
   author       String?
   userId       String?
-  User         User?    @relation(fields: [userId], references: [uuid])
+  User         User?    @relation(fields: [userId], references: [id])
 }
 
 model User {
-  uuid         String @id @default(uuid())
+  id           String @id @default(uuid())
   name         String
   email        String @unique
   passwordHash String

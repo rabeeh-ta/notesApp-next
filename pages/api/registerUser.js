@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 export default function registerUser(req, res) {
   const { method } = req;
   const { name, email, password } = req.body;
-  console.log(req.body);
   const saltRounds = 10;
 
   // only allow POST requests to this route
