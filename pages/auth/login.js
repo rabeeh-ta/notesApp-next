@@ -22,7 +22,7 @@ export default function login() {
 
     if (res.status === 200) {
       // Always do navigations after the first render to avoid Error: Abort fetching component for route
-      router.push('/', undefined, { shallow: true });
+      router.push('/');
     } else {
       alert('wrong credentials');
     }
