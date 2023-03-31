@@ -19,6 +19,7 @@ export const authOptions = {
   ],
 
   callbacks: {
+    secret: process.env.NEXTAUTH_SECRET,
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       session.user.uuid = token.sub; // the sub filed in the token container the id field from the object returned from the authorize function
